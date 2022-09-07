@@ -22,12 +22,12 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function SideBar() {
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(true);
+export default function ListProducts(props) {
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [filters, setFilters] = useState(0);
+  const [filtersChecked, setFiltersChecked] = useState([]);
 
   useEffect(() => {
-    console.log("Fetch");
     fetch("https://fakestoreapi.com/products/categories")
       .then((res) => res.json())
       .then((json) => {
@@ -40,6 +40,16 @@ export default function SideBar() {
         ]);
       });
   }, []);
+
+  const categoryHandler = (category) => {
+    if (filters != 0) {
+      if (filtersChecked.includes(category)) {
+        setFiltersChecked(filtersChecked.filter((categ) => categ != category));
+      } else {
+        setFiltersChecked([...filtersChecked, category]);
+      }
+    }
+  };
 
   const filterHandlerM = () => {
     if (filters != 0) {
@@ -73,8 +83,10 @@ export default function SideBar() {
                         id={`filter-mobile-${section.id}-${optionIdx}`}
                         name={`${section.id}[]`}
                         defaultValue={option}
+                        defaultChecked={filtersChecked.includes(option)}
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                        onChange={() => categoryHandler(option)}
                       />
                       <label
                         htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
@@ -125,8 +137,10 @@ export default function SideBar() {
                         id={`filter-${section.id}-${optionIdx}`}
                         name={`${section.id}[]`}
                         defaultValue={option}
+                        defaultChecked={filtersChecked.includes(option)}
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                        onChange={() => categoryHandler(option)}
                       />
                       <label
                         htmlFor={`filter-${section.id}-${optionIdx}`}
@@ -206,7 +220,7 @@ export default function SideBar() {
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline justify-between border-b border-gray-200 pt-24 pb-6">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-              New Arrivals
+              Products
             </h1>
 
             <div className="flex items-center">
@@ -287,7 +301,14 @@ export default function SideBar() {
 
               {/* Product grid */}
               <div className="lg:col-span-3">
-                <Products />
+                <Products
+                  categories={filtersChecked}
+                  changeProduct={props.changeProduct}
+                  changeScreen={props.changeScreen}
+                  changeNewCategory={props.changeCategory}
+                  newCategory={props.category}
+                  updateFilters={setFiltersChecked}
+                />
               </div>
             </div>
           </section>
