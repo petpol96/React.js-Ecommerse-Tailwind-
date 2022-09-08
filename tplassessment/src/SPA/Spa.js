@@ -22,7 +22,7 @@ function Spa() {
   }
   return (
         <div>
-            <SpaHeader changeScreen={setScreen}/>
+            <SpaHeader changeScreen={setScreen} />
             {screenHandler()}
         </div>
   )

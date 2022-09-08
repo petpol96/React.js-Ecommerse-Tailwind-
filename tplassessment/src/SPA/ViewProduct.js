@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import Reviews from "./Reviews";
 
 export default function ViewProduct(props) {
   const [product, setProduct] = useState(0);
@@ -10,7 +10,9 @@ export default function ViewProduct(props) {
         setProduct(json);
       });
   }, []);
+
   return (
+    
     <div className="bg-white">
       <div className="pt-6">
         <nav aria-label="Breadcrumb">
@@ -20,7 +22,13 @@ export default function ViewProduct(props) {
           >
             <li key="products">
               <div className="flex items-center">
-                <a className="mr-2 text-sm font-medium text-gray-900" onClick={()=>{props.changeScreen(0)}} href='#'>
+                <a
+                  className="mr-2 text-sm font-medium text-gray-900"
+                  onClick={() => {
+                    props.changeScreen(0);
+                  }}
+                  href="#"
+                >
                   Products
                 </a>
                 <svg
@@ -38,11 +46,14 @@ export default function ViewProduct(props) {
             </li>
             <li key="name">
               <div className="flex items-center">
-                <a className="mr-2 text-sm font-medium text-gray-900" 
-                onClick={()=>{
-                    props.changeScreen(0)
-                    props.changeCategory(product.category)
-                    }} href='#'>
+                <a
+                  className="mr-2 text-sm font-medium text-gray-900"
+                  onClick={() => {
+                    props.changeScreen(0);
+                    props.changeCategory(product.category);
+                  }}
+                  href="#"
+                >
                   {product.category}
                 </a>
                 <svg
@@ -92,6 +103,8 @@ export default function ViewProduct(props) {
             <p className="text-3xl tracking-tight text-gray-900">
               {product.price}$
             </p>
+
+                <Reviews rating={product.rating}/>
 
             <button
               type="submit"
