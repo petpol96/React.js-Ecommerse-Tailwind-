@@ -12,7 +12,7 @@ import Sort from "./Sort";
 
 
 
-export default function ListProducts(props) {
+export default function ProductPage(props) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [filters, setFilters] = useState(0);
   const [filtersChecked, setFiltersChecked] = useState([]);
@@ -101,7 +101,7 @@ export default function ListProducts(props) {
         <Disclosure
           as="div"
           key={section.id}
-          className="border-b border-gray-200 py-6"
+          className="border-b border-gray-200 py-6 sticky h-max top-20 "
         >
           {({ open }) => (
             <>

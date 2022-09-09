@@ -2,7 +2,7 @@ import React from 'react'
 import SpaHeader from './SpaHeader'
 import ViewProduct from './ViewProduct'
 import { useState } from 'react'
-import ListProducts from './ListProducts'
+import ProductPage from './ProductPage'
 function Spa() {
   const [screen,setScreen]=useState(0)
   const [productView,setProductView]=useState(0)
@@ -12,7 +12,7 @@ function Spa() {
   const screenHandler =()=>{
     switch(screen){
       case 0:
-        return <ListProducts changeScreen={setScreen} changeProduct={setProductView} changeCategory={setCategory}  category={category}/>
+        return <ProductPage changeScreen={setScreen} changeProduct={setProductView} changeCategory={setCategory}  category={category}/>
         break;
       case 1:
         return <ViewProduct changeScreen={setScreen} product={productView} changeCategory={setCategory} />
