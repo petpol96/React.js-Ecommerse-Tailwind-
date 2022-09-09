@@ -20,6 +20,8 @@ Spa:Top level component deciding which component will render
 
 If you want to view the Landing Page just paste LandingPage.js in App,js
 
-#Command flow npm install
+# Command flow 
+
+npm install
 
 npm start
