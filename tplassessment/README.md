@@ -1,6 +1,6 @@
 # Landing Page folder:
 
-If you want to view the Landing Page just paste LandingPage.js in App,js
+To view the Landing Page just paste LandingPage.js in App,js
 
 # Spa:
 
